@@ -24,7 +24,7 @@ export default function TeamSection() {
                         <h2 className="text-3xl font-bold sm:text-4xl">Meet the Founders</h2>
                     </div>
                     <div className="mt-6 sm:mt-0">
-                        <p>Two passionate entrepreneurs dedicated to revolutionizing investment management through AI-powered technology.</p>
+                        <p>Two passionate engineers dedicated to revolutionizing investment management through AI-powered technology.</p>
                     </div>
                 </div>
                 <div className="mt-12 md:mt-24">
