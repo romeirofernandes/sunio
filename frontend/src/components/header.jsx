@@ -54,6 +54,11 @@ export const HeroHeader = () => {
                                     <li key={index}>
                                         <a
                                             href={item.href}
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                const element = document.querySelector(item.href)
+                                                element?.scrollIntoView({ behavior: 'smooth' })
+                                            }}
                                             className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                             <span>{item.name}</span>
                                         </a>
@@ -70,6 +75,12 @@ export const HeroHeader = () => {
                                         <li key={index}>
                                             <a
                                                 href={item.href}
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    setMenuState(false)
+                                                    const element = document.querySelector(item.href)
+                                                    element?.scrollIntoView({ behavior: 'smooth' })
+                                                }}
                                                 className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </a>
@@ -80,19 +91,11 @@ export const HeroHeader = () => {
                             <div
                                 className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                                 <Button
-                                    variant="outline"
                                     size="sm"
-                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <span>Login</span>
-                                </Button>
-                                <Button size="sm" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={cn(isScrolled && 'lg:hidden')}>
-                                    <span>Sign Up</span>
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                                    onClick={() => {
+                                        const element = document.querySelector('#contact')
+                                        element?.scrollIntoView({ behavior: 'smooth' })
+                                    }}>
                                     <span>Get Started</span>
                                 </Button>
                             </div>

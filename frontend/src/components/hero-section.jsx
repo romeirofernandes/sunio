@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { TextEffect } from '@/components/ui/text-effect'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 import { HeroHeader } from './header'
-import { LogoCloud } from './logo-cloud'
 import { saveEmail } from '@/lib/firebase'
 
 const transitionVariants = {
@@ -57,7 +56,7 @@ export default function HeroSection() {
                 className="overflow-hidden [--color-primary-foreground:var(--color-white)] [--color-primary:var(--color-green-600)]">
                 <section id="home">
                     <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-32 lg:pt-48">
-                        <div className="relative z-10 mx-auto max-w-4xl text-center">
+                        <div className="relative z-10 mx-auto max-w-6xl text-center">
                             <TextEffect
                                 preset="fade-in-blur"
                                 speedSegment={0.3}
@@ -152,7 +151,6 @@ export default function HeroSection() {
                         </div>
                     </div>
                 </section>
-                <LogoCloud />
             </main>
         </>
     );
