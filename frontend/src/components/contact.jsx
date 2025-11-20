@@ -1,11 +1,49 @@
+import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { saveContactForm } from '@/lib/firebase'
+import { CheckCircle2 } from 'lucide-react'
 
 export default function ContactSection() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        country: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null);
+
+    const handleChange = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        
+        const result = await saveContactForm(formData);
+        
+        if (result.success) {
+            setSubmitStatus('success');
+            setFormData({
+                name: '',
+                email: '',
+                country: '',
+                message: ''
+            });
+            setTimeout(() => setSubmitStatus(null), 5000);
+        } else {
+            setSubmitStatus('error');
+            setTimeout(() => setSubmitStatus(null), 5000);
+        }
+        setIsSubmitting(false);
+    };
+
     return (
         <section id="contact" className="py-32">
             <div className="mx-auto max-w-6xl px-4 lg:px-0">
@@ -39,58 +77,71 @@ export default function ContactSection() {
 
                 <div
                     className="h-3 border-x bg-[repeating-linear-gradient(-45deg,var(--color-border),var(--color-border)_1px,transparent_1px,transparent_6px)]"></div>
-                <form action="" className="border px-4 py-12 lg:px-0 lg:py-24">
-                    <Card className="mx-auto max-w-lg p-8 sm:p-16">
+                <form onSubmit={handleSubmit} className="border px-4 py-12 lg:px-0 lg:py-24">
+                    <Card className="mx-auto max-w-4xl p-8 sm:p-16">
                         <h3 className="text-xl font-semibold">Let's Start Your Investment Journey</h3>
                         <p className="mt-4 text-sm">Reach out to our team! We're eager to help you achieve your financial goals with personalized AI-powered guidance.</p>
+
+                        {submitStatus === 'success' && (
+                            <div className="mt-6 rounded-lg border border-green-500/50 bg-green-500/10 p-4 text-green-600 dark:text-green-400">
+                                <div className="flex items-center gap-2">
+                                    <CheckCircle2 className="size-5" />
+                                    <p className="font-medium">Thank you! We'll get back to you soon.</p>
+                                </div>
+                            </div>
+                        )}
+                        {submitStatus === 'error' && (
+                            <div className="mt-6 rounded-lg border border-red-500/50 bg-red-500/10 p-4 text-red-600 dark:text-red-400">
+                                <p className="font-medium">Something went wrong. Please try again.</p>
+                            </div>
+                        )}
 
                         <div className="**:[&>label]:block mt-12 space-y-6 *:space-y-3">
                             <div>
                                 <Label htmlFor="name" className="space-y-2">
                                     Full name
                                 </Label>
-                                <Input type="text" id="name" required />
+                                <Input 
+                                    type="text" 
+                                    id="name" 
+                                    value={formData.name}
+                                    onChange={(e) => handleChange('name', e.target.value)}
+                                    required 
+                                    disabled={isSubmitting}
+                                />
                             </div>
                             <div>
                                 <Label htmlFor="email" className="space-y-2">
                                     Work Email
                                 </Label>
-                                <Input type="email" id="email" required />
+                                <Input 
+                                    type="email" 
+                                    id="email" 
+                                    value={formData.email}
+                                    onChange={(e) => handleChange('email', e.target.value)}
+                                    required 
+                                    disabled={isSubmitting}
+                                />
                             </div>
                             <div>
                                 <Label htmlFor="country" className="space-y-2">
                                     Country/Region
                                 </Label>
-                                <Select>
+                                <Select 
+                                    value={formData.country}
+                                    onValueChange={(value) => handleChange('country', value)}
+                                    disabled={isSubmitting}
+                                >
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select a country" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="1">DR Congo</SelectItem>
-                                        <SelectItem value="2">United States</SelectItem>
-                                        <SelectItem value="3">France</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <div>
-                                <Label htmlFor="website" className="space-y-2">
-                                    Company Website
-                                </Label>
-                                <Input type="url" id="website" />
-                            </div>
-                            <div>
-                                <Label htmlFor="job" className="space-y-2">
-                                    Job function
-                                </Label>
-                                <Select>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select a job function" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="1">Finance</SelectItem>
-                                        <SelectItem value="2">Education</SelectItem>
-                                        <SelectItem value="3">Legal</SelectItem>
-                                        <SelectItem value="4">More</SelectItem>
+                                        <SelectItem value="DR Congo">DR Congo</SelectItem>
+                                        <SelectItem value="United States">United States</SelectItem>
+                                        <SelectItem value="France">France</SelectItem>
+                                        <SelectItem value="India">India</SelectItem>
+                                        <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+                                        <SelectItem value="Canada">Canada</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
@@ -98,9 +149,17 @@ export default function ContactSection() {
                                 <Label htmlFor="msg" className="space-y-2">
                                     Message
                                 </Label>
-                                <Textarea id="msg" rows={3} />
+                                <Textarea 
+                                    id="msg" 
+                                    rows={3} 
+                                    value={formData.message}
+                                    onChange={(e) => handleChange('message', e.target.value)}
+                                    disabled={isSubmitting}
+                                />
                             </div>
-                            <Button>Submit</Button>
+                            <Button type="submit" disabled={isSubmitting}>
+                                {isSubmitting ? 'Submitting...' : 'Submit'}
+                            </Button>
                         </div>
                     </Card>
                 </form>
