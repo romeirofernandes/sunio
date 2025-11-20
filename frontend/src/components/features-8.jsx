@@ -28,9 +28,9 @@ export default function FeaturesSection() {
     return (
         <section id="features" className="bg-gray-50 py-16 md:py-32 dark:bg-transparent">
             <div className="mx-auto max-w-6xl px-6">
-                <div className="mx-auto max-w-2xl space-y-6 text-center mb-16">
+                <div className="mx-auto max-w-5xl space-y-6 text-center mb-16">
                     <h2 className="text-4xl font-semibold lg:text-5xl">Powerful Features for Smart Investing</h2>
-                    <p className="text-lg">Everything you need to master the market with AI-powered guidance and real-time insights.</p>
+                    <p className="text-lg mt-10">Everything you need to master the market with AI-powered guidance and real-time insights.</p>
                 </div>
                 <div className="relative">
                     <div className="relative z-10 grid grid-cols-6 gap-3">

@@ -17,9 +17,9 @@ export default function ContactSection() {
                         <div>
                             <h2 className="mb-3 text-lg font-semibold">Support</h2>
                             <a
-                                href="mailto:support@sunio.com"
+                                href="mailto:theromeirofernandes@gmail.com"
                                 className="text-lg text-blue-600 hover:underline dark:text-blue-400">
-                                support@sunio.com
+                                theromeirofernandes@gmail.com
                             </a>
                             <p className="mt-3 text-sm">Get help with your investments</p>
                         </div>
@@ -28,9 +28,9 @@ export default function ContactSection() {
                         <div>
                             <h3 className="mb-3 text-lg font-semibold">Partnerships</h3>
                             <a
-                                href="mailto:partners@sunio.com"
+                                href="mailto:russeldanielpaul@gmail.com"
                                 className="text-lg text-blue-600 hover:underline dark:text-blue-400">
-                                partners@sunio.com
+                                russeldanielpaul@gmail.com
                             </a>
                             <p className="mt-3 text-sm">Collaborate with us</p>
                         </div>

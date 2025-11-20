@@ -62,7 +62,7 @@ export default function HeroSection() {
                                 speedSegment={0.3}
                                 as="h1"
                                 className="text-balance text-5xl font-medium md:text-6xl">
-                                Master the Market with AI-Powered Investment Guidance
+                                AI-Powered Investment Guidance
                             </TextEffect>
                             <TextEffect
                                 per="line"
@@ -70,7 +70,7 @@ export default function HeroSection() {
                                 speedSegment={0.3}
                                 delay={0.5}
                                 as="p"
-                                className="mx-auto mt-6 max-w-2xl text-pretty text-lg">
+                                className="mx-auto mt-10 max-w-2xl text-pretty text-lg">
                                 Transform your investment journey with Sunio. Get personalized AI guidance, practice with mock trading, and build your portfolio step-by-step with confidence.
                             </TextEffect>
 

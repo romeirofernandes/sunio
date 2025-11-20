@@ -33,9 +33,13 @@ export const HeroHeader = () => {
                     <div
                         className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full justify-between lg:w-auto">
-                            <a href="/" aria-label="home" className="flex items-center space-x-2">
+                            <button
+                                aria-label="home"
+                                className="flex items-center space-x-2 bg-transparent border-none"
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            >
                                 <Logo />
-                            </a>
+                            </button>
 
                             <button
                                 onClick={() => setMenuState(!menuState)}
@@ -52,16 +56,16 @@ export const HeroHeader = () => {
                             <ul className="flex gap-8 text-sm">
                                 {menuItems.map((item, index) => (
                                     <li key={index}>
-                                        <a
-                                            href={item.href}
-                                            onClick={(e) => {
-                                                e.preventDefault()
-                                                const element = document.querySelector(item.href)
-                                                element?.scrollIntoView({ behavior: 'smooth' })
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const el = document.querySelector(item.href)
+                                                el?.scrollIntoView({ behavior: 'smooth' })
                                             }}
-                                            className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                            className="bg-transparent border-none text-muted-foreground hover:text-accent-foreground block duration-150 cursor-pointer"
+                                        >
                                             <span>{item.name}</span>
-                                        </a>
+                                        </button>
                                     </li>
                                 ))}
                             </ul>
@@ -73,17 +77,17 @@ export const HeroHeader = () => {
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
                                         <li key={index}>
-                                            <a
-                                                href={item.href}
-                                                onClick={(e) => {
-                                                    e.preventDefault()
+                                            <button
+                                                type="button"
+                                                onClick={() => {
                                                     setMenuState(false)
-                                                    const element = document.querySelector(item.href)
-                                                    element?.scrollIntoView({ behavior: 'smooth' })
+                                                    const el = document.querySelector(item.href)
+                                                    el?.scrollIntoView({ behavior: 'smooth' })
                                                 }}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                                className="bg-transparent border-none text-muted-foreground hover:text-accent-foreground block duration-150 cursor-pointer"
+                                            >
                                                 <span>{item.name}</span>
-                                            </a>
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
